@@ -1,0 +1,27 @@
+{
+  "name": "@totorototo/trail-tokens",
+  "version": "1.0.0",
+  "description": "Trail Suite design tokens shared by Terminus, Waymark and Retrace",
+  "type": "module",
+  "main": "./index.js",
+  "exports": {
+    ".": "./index.js",
+    "./theme.js": "./theme.js",
+    "./tokens.json": "./tokens.json"
+  },
+  "files": [
+    "index.js",
+    "theme.js",
+    "tokens.json"
+  ],
+  "sideEffects": false,
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "test": "vitest run"
+  },
+  "devDependencies": {
+    "vitest": "4.1.9"
+  },
+  "repository": "github:totorototo/trail-tokens",
+  "license": "MIT"
+}
