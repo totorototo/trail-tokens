@@ -15,10 +15,15 @@ const normalizeHex = (value) =>
     typeof v === "string" && /^#[0-9a-f]{3,8}$/i.test(v) ? v.toLowerCase() : v,
   );
 
-// What changed on purpose since the hand-written copies (v1.1.0): the sans stack names
-// the system UI face instead of an Inter no app loads, and the map gained its shadow.
+// What changed on purpose since the hand-written copies: the sans stack names the system
+// UI face instead of an Inter no app loads, and the map gained its shadow (v1.1.0); the
+// control border dropped to a quiet frame (v1.2.0).
 const SINCE_HAND_COPY = (theme) => ({
   ...theme,
+  colors: extendColors(theme, {
+    dark: { "--color-control-border": "#696569" },
+    light: { "--color-control-border": "#8b8b8c" },
+  }).colors,
   map: { ...theme.map, shadow: "rgba(0, 0, 0, 0.4)" },
   font: {
     ...theme.font,
