@@ -21,7 +21,7 @@ import THEME, { toCustomProperties } from "@totorototo/trail-tokens";
 ## Install
 
 ```bash
-npm i github:totorototo/trail-tokens#v1.0.0
+npm i github:totorototo/trail-tokens#v1.1.0
 ```
 
 `theme.js` is committed and the package has no `prepare` script. npm runs `prepare` for git

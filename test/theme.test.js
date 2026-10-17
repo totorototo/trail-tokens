@@ -15,9 +15,26 @@ const normalizeHex = (value) =>
     typeof v === "string" && /^#[0-9a-f]{3,8}$/i.test(v) ? v.toLowerCase() : v,
   );
 
+// What changed on purpose since the hand-written copies (v1.1.0): the sans stack names
+// the system UI face instead of an Inter no app loads, and the map gained its shadow.
+const SINCE_HAND_COPY = (theme) => ({
+  ...theme,
+  map: { ...theme.map, shadow: "rgba(0, 0, 0, 0.4)" },
+  font: {
+    ...theme.font,
+    family: {
+      ...theme.font.family,
+      "--font-family-sansSerif":
+        "system-ui, -apple-system, 'Segoe UI', 'Roboto', 'Helvetica', 'Arial', sans-serif",
+    },
+  },
+});
+
 describe("generated THEME", () => {
   it("equals Terminus's hand-written Theme.js plus Waymark's field tokens", () => {
-    expect(normalizeHex(THEME)).toEqual(normalizeHex(extendColors(TERMINUS, FIELDS)));
+    expect(normalizeHex(THEME)).toEqual(
+      normalizeHex(SINCE_HAND_COPY(extendColors(TERMINUS, FIELDS))),
+    );
   });
 
   it("has the same colour keys in both themes", () => {

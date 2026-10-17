@@ -1,6 +1,6 @@
 {
   "name": "@totorototo/trail-tokens",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Trail Suite design tokens shared by Terminus, Waymark and Retrace",
   "type": "module",
   "main": "./index.js",
