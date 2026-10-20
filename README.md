@@ -80,3 +80,7 @@ npm refuses an override that differs from a direct dependency's spec (`EOVERRIDE
 |---|---|
 | `npm run build` | `tokens.json` → `theme.js` |
 | `npm test` | golden test against the hand-written theme, plus the helpers |
+
+## License
+
+MIT, see `LICENSE`.
