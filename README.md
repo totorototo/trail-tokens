@@ -1,13 +1,14 @@
 # trail-tokens
 
-The Trail Suite design tokens, shared by Terminus, Waymark and Retrace.
+The Trail Suite design tokens, shared by Terminus, Waymark, Retrace and Regimen.
 
 - `tokens.json` is the committed mirror of the Design System artifact's `project/tokens.json`
   (<https://claude.ai/artifact/EkGhtCPuuA93VoU6r6MQcV>). `meta.artifact.version` records which
   artifact version it came from.
 - `scripts/build.mjs` generates `theme.js`, the object each app's `src/theme/Theme.js` used to
   write by hand: `colors.light` / `colors.dark` (`--color-*` keys), `map`, `font.family` /
-  `weights` / `sizes`, `borderRadius`, `zIndex`, `transitions`, `spacing` and `breakpoints`.
+  `weights` / `sizes`, `borderRadius`, `zIndex`, `transitions`, `layout` (`--gutter`,
+  `--gutter-tool`, `--measure`), `spacing` and `breakpoints`.
 - `index.js` exports `THEME` (default), `toCustomProperties(entries)` and
   `extendColors(theme, { light, dark })` for tokens that belong to one app only.
 
@@ -42,8 +43,10 @@ Unknown names, unknown themes and reference cycles fail the build.
 ## Changing a token
 
 1. **Artifact first.** Edit the token in the Design System artifact.
-2. **Copy** the artifact's `project/tokens.json` over `tokens.json`. Set `meta.artifact.version`
-   and `meta.synced`.
+2. **Merge** the artifact's change into `tokens.json` by hand. Don't copy the file over: the
+   artifact's page can't read `{color-x.dark}` references, so its copy holds the resolved hex,
+   and copying it would drop the references above. Set `meta.artifact.version` and
+   `meta.synced`.
 3. **Build and test.** Run `npm run build && npm test`. If the change is intentional, update the
    golden fixture (`test/fixtures/terminus-theme.js`) in the same PR, so the diff shows the new
    value.

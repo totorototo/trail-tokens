@@ -60,13 +60,19 @@ const map = Object.fromEntries(
 const customProperties = (group) =>
   Object.fromEntries(tokens[group].tokens.map((t) => [`--${t.name}`, t.value]));
 
-// Index-ordered list of `prefix-N` tokens; anything else in the group (measure,
-// touch-target) is documentation only.
+// Index-ordered list of `prefix-N` tokens; anything else in the group is left out
+// (touch-target is documentation only; measure goes out with the layout tokens).
 const indexed = (group, prefix) =>
   tokens[group].tokens
     .filter((t) => new RegExp(`^${prefix}-\\d+$`).test(t.name))
     .sort((a, b) => Number(a.name.split("-").at(-1)) - Number(b.name.split("-").at(-1)))
     .map((t) => t.value);
+
+const spacingToken = (name) => {
+  const token = tokens.spacing.tokens.find((t) => t.name === name);
+  if (!token) throw new Error(`Missing ${name}`);
+  return token.value;
+};
 
 const FAMILY_KEYS = { sans: "--font-family-sansSerif", mono: "--font-family-mono" };
 
@@ -86,6 +92,7 @@ const THEME = {
   borderRadius: customProperties("radius"),
   zIndex: customProperties("zIndex"),
   transitions: customProperties("motion"),
+  layout: { ...customProperties("layout"), "--measure": spacingToken("measure") },
   spacing: indexed("spacing", "space").map((v) => Number.parseFloat(v)),
   breakpoints: ["sm", "md", "lg"].map((size) => {
     const token = tokens.breakpoint.tokens.find((t) => t.name === `breakpoint-${size}`);
