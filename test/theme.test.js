@@ -17,7 +17,8 @@ const normalizeHex = (value) =>
 
 // What changed on purpose since the hand-written copies: the sans stack names the system
 // UI face instead of an Inter no app loads, and the map gained its shadow (v1.1.0); the
-// control border dropped to a quiet frame (v1.2.0).
+// control border dropped to a quiet frame (v1.2.0); the gutters and the measure became
+// tokens (v1.3.0).
 const SINCE_HAND_COPY = (theme) => ({
   ...theme,
   colors: extendColors(theme, {
@@ -25,6 +26,11 @@ const SINCE_HAND_COPY = (theme) => ({
     light: { "--color-control-border": "#8b8b8c" },
   }).colors,
   map: { ...theme.map, shadow: "rgba(0, 0, 0, 0.4)" },
+  layout: {
+    "--gutter": "clamp(1.25rem, 6vw, 4rem)",
+    "--gutter-tool": "clamp(1rem, 3vw, 2.5rem)",
+    "--measure": "46rem",
+  },
   font: {
     ...theme.font,
     family: {
