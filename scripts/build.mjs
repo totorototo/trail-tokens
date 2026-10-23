@@ -60,13 +60,18 @@ const map = Object.fromEntries(
 const customProperties = (group) =>
   Object.fromEntries(tokens[group].tokens.map((t) => [`--${t.name}`, t.value]));
 
-// Index-ordered list of `prefix-N` tokens; anything else in the group is left out
-// (touch-target is documentation only; measure goes out with the layout tokens).
-const indexed = (group, prefix) =>
-  tokens[group].tokens
-    .filter((t) => new RegExp(`^${prefix}-\\d+$`).test(t.name))
-    .sort((a, b) => Number(a.name.split("-").at(-1)) - Number(b.name.split("-").at(-1)))
-    .map((t) => t.value);
+// The 4px grid (`space-*`), as custom properties; measure and touch-target go out with the
+// layout tokens.
+const space = Object.fromEntries(
+  tokens.spacing.tokens
+    .filter((t) => t.name.startsWith("space-"))
+    .map((t) => [`--${t.name}`, t.value]),
+);
+
+// The doubling scale Terminus reads as theme.spacing[n] (px), from before the 4px grid.
+// why frozen here, not in tokens.json: it is no longer the design system's scale, only what
+// Terminus's styles still index; it goes when Terminus moves to theme.space.
+const LEGACY_SPACING = [0, 2, 4, 8, 16, 32, 64, 128, 256];
 
 const spacingToken = (name) => {
   const token = tokens.spacing.tokens.find((t) => t.name === name);
@@ -92,8 +97,13 @@ const THEME = {
   borderRadius: customProperties("radius"),
   zIndex: customProperties("zIndex"),
   transitions: customProperties("motion"),
-  layout: { ...customProperties("layout"), "--measure": spacingToken("measure") },
-  spacing: indexed("spacing", "space").map((v) => Number.parseFloat(v)),
+  layout: {
+    ...customProperties("layout"),
+    "--measure": spacingToken("measure"),
+    "--touch-target": spacingToken("touch-target"),
+  },
+  space,
+  spacing: LEGACY_SPACING,
   breakpoints: ["sm", "md", "lg"].map((size) => {
     const token = tokens.breakpoint.tokens.find((t) => t.name === `breakpoint-${size}`);
     if (!token) throw new Error(`Missing breakpoint-${size}`);

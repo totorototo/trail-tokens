@@ -18,7 +18,7 @@ const normalizeHex = (value) =>
 // What changed on purpose since the hand-written copies: the sans stack names the system
 // UI face instead of an Inter no app loads, and the map gained its shadow (v1.1.0); the
 // control border dropped to a quiet frame (v1.2.0); the gutters and the measure became
-// tokens (v1.3.0).
+// tokens (v1.3.0); the 4px spacing grid and the start page's measures (v1.4.0).
 const SINCE_HAND_COPY = (theme) => ({
   ...theme,
   colors: extendColors(theme, {
@@ -29,7 +29,27 @@ const SINCE_HAND_COPY = (theme) => ({
   layout: {
     "--gutter": "clamp(1.25rem, 6vw, 4rem)",
     "--gutter-tool": "clamp(1rem, 3vw, 2.5rem)",
+    "--measure-lede": "38ch",
+    "--measure-list": "28rem",
+    "--start-gap": "clamp(3rem, 12vh, 6rem)",
     "--measure": "46rem",
+    "--touch-target": "44px",
+  },
+  space: {
+    "--space-0": "0rem",
+    "--space-hair": "0.125rem",
+    "--space-1": "0.25rem",
+    "--space-2": "0.5rem",
+    "--space-3": "0.75rem",
+    "--space-4": "1rem",
+    "--space-5": "1.25rem",
+    "--space-6": "1.5rem",
+    "--space-7": "1.75rem",
+    "--space-8": "2rem",
+    "--space-10": "2.5rem",
+    "--space-12": "3rem",
+    "--space-16": "4rem",
+    "--space-24": "6rem",
   },
   font: {
     ...theme.font,
