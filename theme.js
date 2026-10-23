@@ -136,6 +136,8 @@ const THEME = {
     "--measure-lede": "38ch",
     "--measure-list": "28rem",
     "--start-gap": "clamp(3rem, 12vh, 6rem)",
+    "--section-block": "clamp(4rem, 14vh, 7rem)",
+    "--stat-gap": "clamp(1.5rem, 5vw, 3.5rem)",
     "--measure": "46rem",
     "--touch-target": "44px"
   },
@@ -153,6 +155,7 @@ const THEME = {
     "--space-10": "2.5rem",
     "--space-12": "3rem",
     "--space-16": "4rem",
+    "--space-20": "5rem",
     "--space-24": "6rem"
   },
   "spacing": [

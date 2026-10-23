@@ -9,7 +9,7 @@ The Trail Suite design tokens, shared by Terminus, Waymark, Retrace and Regimen.
   write by hand: `colors.light` / `colors.dark` (`--color-*` keys), `map`, `font.family` /
   `weights` / `sizes`, `borderRadius`, `zIndex`, `transitions`, `layout` (`--gutter`,
   `--gutter-tool`, `--measure`, `--measure-lede`, `--measure-list`, `--start-gap`,
-  `--touch-target`), `space` (the 4px grid, `--space-*`), `spacing` (the old doubling scale,
+  `--section-block`, `--stat-gap`, `--touch-target`), `space` (the 4px grid, `--space-*`), `spacing` (the old doubling scale,
   kept for Terminus) and `breakpoints`.
 - `index.js` exports `THEME` (default), `toCustomProperties(entries)` and
   `extendColors(theme, { light, dark })` for tokens that belong to one app only.
